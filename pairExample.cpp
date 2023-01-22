@@ -12,6 +12,7 @@ int main()
 
     p1.first = 2;
     p1.second = "tanishka";
+
     cout << p.first << " : " << p.second << endl;
     cout << p1.first << " : " << p1.second;
 
