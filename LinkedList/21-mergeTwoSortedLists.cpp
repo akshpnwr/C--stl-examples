@@ -74,32 +74,37 @@ ListNode *insertAtK(ListNode *head, int val, int k)
 
 ListNode *sortList(ListNode *l1, ListNode *l2)
 {
-    ListNode *l = NULL;
 
-    ListNode *temp1 = l1;
-    ListNode *temp2 = l2;
+    ListNode *dummy = new ListNode(-1);
+    ListNode *tail = dummy;
 
-    int i = 1;
-    while (temp1 != NULL)
+    while (l1 && l2)
     {
-        while (temp2 != NULL)
+        if (l1->val <= l2->val)
         {
-            if (temp2->val <= temp1->val)
-            {
-                l1 = insertAtK(l1, temp2->val, i);
-                i = i + 1;
-            }
-            else
-                break;
-
-            temp2 = temp2->next;
+            tail->next = l1;
+            tail = l1;
+            l1 = l1->next;
         }
-
-        temp1 = temp1->next;
-        i = i + 1;
+        else
+        {
+            tail->next = l2;
+            tail = l2;
+            l2 = l2->next;
+        }
+        tail = tail->next;
     }
 
-    return l1;
+    if (l1)
+    {
+        tail->next = l1;
+    }
+    if (l2)
+    {
+        tail->next = l2;
+    }
+
+    return dummy->next;
 }
 
 int main()
