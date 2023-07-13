@@ -14,7 +14,7 @@ int twoPointerMethod(vector<int> &prices)
             maxP = max(tempP, maxP);
         }
         else
-            l++;
+            l = r;
 
         r++;
     }
@@ -25,7 +25,7 @@ int twoPointerMethod(vector<int> &prices)
 int main()
 {
 
-    vector<int> prices = {7, 1, 5, 3, 6, 4};
+    vector<int> prices = {2, 1, 2, 1, 0, 1, 2};
 
     // two pointer method
     cout << "Max profit = " << twoPointerMethod(prices);
