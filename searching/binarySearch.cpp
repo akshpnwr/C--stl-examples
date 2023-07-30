@@ -22,9 +22,9 @@ int binarySearch(vector<int> nums, int val)
 
 int main()
 {
-    vector<int> nums{1, 4, 2, 6, 3, 5};
+    vector<int> nums{1, 2, 3, 4, 5, 6};
 
-    int ans = binarySearch(nums, 3);
+    int ans = binarySearch(nums, 4);
 
     cout << "answer : " << ans;
     return 0;
