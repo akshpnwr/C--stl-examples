@@ -26,6 +26,20 @@ bool isValid(unordered_map<char, vector<char>> graph, int sr, int d)
     return false;
 }
 
+bool isValidRec(unordered_map<char, vector<char>> graph, int src, int dst)
+{
+    if (src == dst)
+        return true;
+
+    for (auto &neighbor : graph[src])
+    {
+        if (isValidRec(graph, neighbor, dst))
+            return true;
+    }
+
+    return false;
+}
+
 int main()
 {
 
@@ -38,7 +52,7 @@ int main()
     g['j'] = {'i'};
     g['k'] = {};
 
-    cout << isValid(g, 'f', 'k');
+    cout << isValidRec(g, 'f', 'k');
 
     return 0;
 }
