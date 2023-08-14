@@ -3,37 +3,31 @@ using namespace std;
 
 int lengthOfLongestSubstring(string s)
 {
-    int ASCII[256] = {0};
+    int ASCII[128] = {0};
 
-    int maxLen = 0;
-    int temp = 0;
+    int res = 0;
+    int l = 0;
 
-    for (int i = 0; i < s.size(); i++)
+    for (int r = 0; r < s.size(); r++)
     {
+        ASCII[s[r]]++;
 
-        ASCII[s[i]]++;
-
-        if (s[i] == s[i + 1])
-            temp = 0;
-
-        if (ASCII[s[i]] > 1)
+        while (ASCII[s[r]] > 1)
         {
-            maxLen = max(temp, maxLen);
-            temp--;
-            ASCII[s[i]] = 0;
-            i--;
+            ASCII[s[l]]--;
+            l++;
         }
-        else
-            temp++;
+
+        res = max(res, r - l + 1);
     }
 
-    return maxLen;
+    return res;
 }
 
 int main()
 {
 
-    cout << lengthOfLongestSubstring("abcabcbb");
+    cout << lengthOfLongestSubstring("pwwkew");
 
     return 0;
 }
