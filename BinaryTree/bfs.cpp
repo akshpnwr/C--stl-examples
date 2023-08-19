@@ -15,28 +15,41 @@ struct Node
     }
 };
 
-void levelOrder(Node *root)
+vector<vector<int>> levelOrder(Node *root)
 {
     if (root == NULL)
-        return;
+        return {};
 
     queue<Node *> mq;
 
+    vector<vector<int>> ans;
+
     mq.push(root);
+
+    vector<int> level;
 
     while (!mq.empty())
     {
-        Node *cur = mq.front();
+        level = {};
+        int len = mq.size();
+        for (int i = 0; i < len; i++)
+        {
+            cout << "x";
+            Node *cur = mq.front();
+            mq.pop();
 
-        cout << cur->val << " ";
-
-        if (cur->left)
-            mq.push(cur->left);
-        if (cur->right)
-            mq.push(cur->right);
-
-        mq.pop();
+            if (cur)
+            {
+                level.push_back(cur->val);
+                mq.push(cur->left);
+                mq.push(cur->right);
+            }
+        }
+        if (!level.empty())
+            ans.push_back(level);
     }
+
+    return ans;
 }
 
 int main()
@@ -48,7 +61,7 @@ int main()
     root->left->right = new Node(5);
     root->right->left = new Node(6);
 
-    levelOrder(root);
+    vector<vector<int>> ans = levelOrder(root);
 
     return 0;
 }
