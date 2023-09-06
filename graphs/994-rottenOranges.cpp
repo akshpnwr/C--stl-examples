@@ -27,7 +27,9 @@ int orangesRotting(vector<vector<int>> &grid)
 
     while (!mq.empty() && fresh > 0)
     {
-        for (int i = 0; i < mq.size(); i++)
+        int qSize = mq.size();
+
+        for (int i = 0; i < qSize; i++)
         {
             int r = mq.front()[0];
             int c = mq.front()[1];
@@ -57,8 +59,8 @@ int main()
 {
 
     vector<vector<int>> grid = {{2, 1, 1},
-                                {1, 1, 0},
-                                {0, 1, 1}};
+                                {1, 1, 1},
+                                {0, 1, 2}};
 
     cout << orangesRotting(grid);
     return 0;
