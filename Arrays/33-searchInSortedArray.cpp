@@ -1,52 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int bs(vector<int> &nums, int left, int right, int target)
-{
-    while (left <= right)
-    {
-        int mid = (left + right) / 2;
-
-        if (target > nums[mid])
-        {
-            return bs(nums, mid + 1, right, target);
-        }
-        else if (target < nums[mid])
-        {
-            return bs(nums, left, right - 1, target);
-        }
-        else
-            return mid;
-    }
-    return -1;
-}
-
 int search(vector<int> &nums, int target)
 {
-    int rotatedAt;
+    int l = 0, r = nums.size() - 1, mid;
 
-    for (int i = 0; i < nums.size(); i++)
+    while (l <= r)
     {
-        if (nums[i] < nums[i - 1])
+
+        mid = (l + r) / 2;
+
+        if (nums[mid] == target)
+            return mid;
+
+        // left portion
+        if (nums[l] <= nums[mid])
         {
-            rotatedAt = i;
+            if (target > nums[mid] || target < nums[l])
+                l = mid + 1;
+            else
+                r = mid - 1;
+        }
+        else
+        {
+            if (target < nums[mid] || target > nums[r])
+                r = mid - 1;
+            else
+                l = mid + 1;
         }
     }
 
-    if (target > nums[nums.size() - 1])
-    {
-        return bs(nums, 0, rotatedAt - 1, target);
-    }
-    else
-    {
-        return bs(nums, rotatedAt, nums.size() - 1, target);
-    }
+    return -1;
 }
 
 int main()
 {
     vector<int> nums{4, 5, 6, 7, 0, 1, 2};
 
-    cout << search(nums, 3);
+    cout << search(nums, 0);
     return 0;
 }
