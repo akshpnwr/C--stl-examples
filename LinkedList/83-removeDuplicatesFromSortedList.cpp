@@ -14,26 +14,14 @@ struct Node
 
 Node *deleteDuplicates(Node *head)
 {
-    Node *prev = head;
     Node *cur = head;
 
-    unordered_map<int, int> mp;
-
-    while (cur)
+    while (cur && cur->next)
     {
-        mp[cur->val]++;
-
-        if (mp[cur->val] >= 2)
-        {
-            prev->next = cur->next;
-            cur->next = NULL;
-            cur = prev->next;
-        }
+        if (cur->val == cur->next->val)
+            cur->next = cur->next->next;
         else
-        {
-            prev = cur;
             cur = cur->next;
-        }
     }
 
     return head;
